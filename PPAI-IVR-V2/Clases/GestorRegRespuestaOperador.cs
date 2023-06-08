@@ -25,10 +25,21 @@ namespace PPAI_IVR.Models
 
         public PantallaRegistrarRegRespuestaOperador Pantalla { get => pantalla; set => pantalla = value; }
 
-
         public GestorRegRespuestaOperador()
         {
             this.pantalla = new PantallaRegistrarRegRespuestaOperador(this);
+        }
+
+        public void tomarRespuestaOperador(Llamada llamada, CategoriaLlamada categoriaLlamada, List<Estado> estados, List<Accion> acciones)
+        {
+            LlamadaEnCurso = llamada;
+            CategoriaSeleccionada = categoriaLlamada;
+            TodosLosEestados = estados;
+            AccionesLlamada = acciones;
+            ObtenerFechaHoraActual();
+            buscarEstadoEnCurso();
+            LlamadaEnCurso.EsTomadaPorOperador(EstadoEnCurso, FechaHoraActual);
+            buscarDatosLlamadaActual();
         }
 
         public DateTime ObtenerFechaHoraActual()
@@ -40,22 +51,21 @@ namespace PPAI_IVR.Models
 
         public void buscarEstadoEnCurso()
         {
-           
             foreach (var est in TodosLosEestados)
             {
                 if (est.esEnCurso())
                 {
                     EstadoEnCurso = est;
                 }
-            }       
-           
-        }
-        public void asignarEstadoEnCurso()
-        {
-            tomadaPorOperador();
+            }     
         }
 
-        public void tomadaPorOperador() 
+        public void asignarEstadoEnCurso()
+        {
+            esTomadaPorOperador();
+        }
+
+        public void esTomadaPorOperador() 
         {
             LlamadaEnCurso.EsTomadaPorOperador(EstadoEnCurso, FechaHoraActual);
         }
@@ -80,22 +90,9 @@ namespace PPAI_IVR.Models
             lista.Add(fechanacAValidar);
             lista.Add(CantHijosAValidar);
             return LlamadaEnCurso.validarInformacionCliente(lista);
-        }
+        }      
 
-
-        public void tomarRespuestaOperador(Llamada llamada, CategoriaLlamada categoriaLlamada, List<Estado> estados, List<Accion> acciones)
-        {
-            LlamadaEnCurso = llamada;
-            CategoriaSeleccionada = categoriaLlamada;
-            TodosLosEestados  = estados;
-            AccionesLlamada = acciones;
-            ObtenerFechaHoraActual();
-            buscarEstadoEnCurso();
-            LlamadaEnCurso.EsTomadaPorOperador(EstadoEnCurso,FechaHoraActual);
-            buscarDatosLlamadaActual();
-        }
-
-        public List<string> buscarAcciones()
+        public List<string> buscarAccionesRequeridas()
         {
             List<string> listaAcciones = new List<string>();
             foreach (var item in AccionesLlamada)
@@ -103,6 +100,13 @@ namespace PPAI_IVR.Models
                 listaAcciones.Add(item.getDescripcion());
             }
             return listaAcciones;
+        }
+
+        public void tomarAccionYDescripcionRTA(string respuesta, string accionRequerida)
+        {
+            respuestaOperador = respuesta;
+            accionSeleccionada = accionRequerida;
+            pantalla.solicitarConfirmacion();
         }
 
         public void tomarConfirmacion()
@@ -113,8 +117,7 @@ namespace PPAI_IVR.Models
             finalizarLlamada(fechaHora);
 
             MessageBox.Show(" Descripción operador: " + LlamadaEnCurso.DescripcionOperador +
-               "\n Duración de la llamada: " + LlamadaEnCurso.Duracion.ToString("hh':'mm':'ss"));
-               
+               "\n Duración de la llamada: " + LlamadaEnCurso.Duracion.ToString("hh':'mm':'ss"));               
         }
 
 
@@ -137,21 +140,13 @@ namespace PPAI_IVR.Models
         public void finalizarLlamada( DateTime fechaHora )
         {
             LlamadaEnCurso.finalizar(fechaHora, EstadoEnCurso);
-        }
-
+        }       
 
         public void FinCU()
         {
             pantalla.Close();
-        }
+        }      
 
-      
-
-        internal void tomarAccionYDescripcionRTA(string respuesta, string accionRequerida)
-        {
-            respuestaOperador = respuesta;
-            accionSeleccionada = accionRequerida;
-            pantalla.solicitarConfirmacion();
-        }
+       
     }
 }

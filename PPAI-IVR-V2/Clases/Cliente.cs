@@ -10,14 +10,11 @@ namespace PPAI_IVR.Models.Clases
 {
     public class Cliente
     {
-        public int Id { get; set; }
-        //[Required(ErrorMessage = "El campo {0} es requerido")]
+        public int Id { get; set; }        
         [Display(Name = "Nombre Completo")]
-        public string NombreCompleto { get; set; }
-        //[Required(ErrorMessage = "El campo {0} es requerido")]
+        public string NombreCompleto { get; set; }        
         [Display(Name = "Numero de celular")]
-        public int nroCelular { get; set; }
-        //[Required(ErrorMessage = "El campo {0} es requerido")]
+        public int nroCelular { get; set; }       
         [Display(Name = "DNI")]
         public int Dni { get; set; }
         public List<InformacionCliente> InformacionesDelCliente { get; set; }
@@ -33,13 +30,13 @@ namespace PPAI_IVR.Models.Clases
         {
             return NombreCompleto;
         }
+
         public bool  esInfoCorrecta(List<string> lista)//Datos que pasa como parametros
         {
             bool datoCant = false;
             bool datoFecha = false;
             int c = 0;
             int f = 0;
-
 
             for (int i = 0; i < InformacionesDelCliente.Count; i++)
             {

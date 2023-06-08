@@ -4,6 +4,8 @@
     {
         private string descripcion { get; set; }
 
+
+
         public Accion(string descripcion)
         {
             this.descripcion = descripcion;

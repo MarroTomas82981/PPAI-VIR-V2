@@ -8,15 +8,22 @@ namespace PPAI_IVR.Clases
     public class Llamada
     {
         public int Id { get; set; }
+
         public string DescripcionOperador { get; set; }
+
         public string DetalleAccionRequerida { get; set; }
+
         public TimeSpan Duracion { get; set; }
+
         public bool EncuestaEnviada { get; set; }
+
         public string ObservacionAuditor { get; set; }
+
         public Cliente Cliente { get; set; }
+
         public OpcionLlamada OpcionLlamada { get; set; }
-        public List<CambioEstado> CambiosDeEstados { get; set; }
-        
+
+        public List<CambioEstado> CambiosDeEstados { get; set; }     
 
 
         public TimeSpan calcualarDuracion(DateTime fechaHoraFin, DateTime fechaHoraInicio)
@@ -28,6 +35,7 @@ namespace PPAI_IVR.Clases
         {
             return true;
         }
+
         public void EsTomadaPorOperador(Estado nombreDeEstadoACambiar, DateTime FechaHoraActual)
         {
             CambioEstado nuevoCambioEstado = new CambioEstado 
@@ -79,13 +87,13 @@ namespace PPAI_IVR.Clases
                 DetalleAccionRequerida = detalleAccion
             }; 
             return llamada;
-        }
-        
+        }        
 
         public Cliente obtenerCliente() 
         {
             return this.Cliente;
         }
+
         public string obtenerNombreClienteLlamada()
         {
             return this.Cliente.getNombre();
@@ -95,14 +103,17 @@ namespace PPAI_IVR.Clases
         {
             this.DescripcionOperador = descripcion;
         } 
+
         public void setDuracion(TimeSpan duracion)
         {
             this.Duracion = duracion;
         }
+
         public void setEstadoActual(TimeSpan duracion)
         {
             Duracion = duracion;
         }
+
         public bool validarInformacionCliente(List<string> list)
         {
             return  Cliente.esInfoCorrecta(list);

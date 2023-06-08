@@ -18,10 +18,8 @@ namespace PPAI_IVR.Clases
 
         public Estado()
         {
-        }
 
-      
-
+        }  
 
         public bool esEnCurso()
         {
@@ -32,11 +30,12 @@ namespace PPAI_IVR.Clases
         {
             return Nombre == "Finalizada";          
         }
+
         public bool esIniciada()
         {
-            return Nombre == "Iniciada";
-           
-        }        
+            return Nombre == "Iniciada";           
+        }       
+        
         public string getNombre()
         {
             return this.Nombre;

@@ -7,10 +7,15 @@ namespace PPAI_IVR.Clases
     public class CategoriaLlamada
     {
         public int Id { get; set; }
+
         public string audioMensajeOpciones { get; set; }
+
         public string mensajeOpciones {get; set; }
+
         public string nombre {get; set; }
+
         public int nroOrden { get; set; }
+
         public List<OpcionLlamada> opcion { get; set; }
 
 
@@ -19,6 +24,7 @@ namespace PPAI_IVR.Clases
         {
             return audioMensajeOpciones;
         }
+
         public DescripcionCategoriaViewModel obtenerDescripcionCategoriaYOpcion()
         {
             DescripcionCategoriaViewModel lista = new DescripcionCategoriaViewModel();            

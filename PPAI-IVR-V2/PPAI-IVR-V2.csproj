@@ -116,5 +116,10 @@
   <ItemGroup>
     <Folder Include="Servicios\" />
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="Imagenes\logo-IVR - copia.ico" />
+    <Content Include="Imagenes\logo-IVR.ico" />
+    <Content Include="Imagenes\Sin-título.ico" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
